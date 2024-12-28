@@ -1,4 +1,6 @@
-﻿namespace RuokalistaApp;
+﻿using RuokalistaApp.Pages;
+
+namespace RuokalistaApp;
 
 public partial class App : Application
 {
@@ -6,7 +8,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		MainPage = new WelcomePage();
 		if (Preferences.Default.ContainsKey("Teema"))
 		{
 			var key = Preferences.Default.Get("Teema", 0);

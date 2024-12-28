@@ -13,8 +13,12 @@ public partial class AppShell : Shell
         Routing.RegisterRoute("Tiedot", typeof(InfoPage));
         Routing.RegisterRoute("Muokkaa", typeof(EditPage));
         Routing.RegisterRoute("SeuraavaViikko", typeof(NextWeekPage));
+        Routing.RegisterRoute("Main", typeof(MainPage));
+        Routing.RegisterRoute("Welcome", typeof(WelcomePage));
 
-        if (Preferences.Default.Get("IsAdmin", false))
+		
+
+		if (Preferences.Default.Get("IsAdmin", false))
 		{
             tabbar.Items.Add(new ShellContent()
             {

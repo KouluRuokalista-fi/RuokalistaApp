@@ -73,6 +73,62 @@
 	  <ApplicationVersion>12</ApplicationVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
+	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\logo_fix.png" ForegroundFile="Resources\AppIcon\logo_fix.png" />
@@ -139,6 +195,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\VotePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

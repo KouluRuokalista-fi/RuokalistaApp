@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RuokalistaApp.Pages.WelcomePage"
+             Title="WelcomePage">
+    <VerticalStackLayout Margin="15">
+
+        <Image Source="logo.png"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               >
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+            </Image.GestureRecognizers>
+
+        </Image>
+
+        <Label 
+            Text="Tervetuloa"
+            FontSize="50"
+            Padding="15"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontAttributes="Bold"
+             />
+
+        
+        <Label Text="Kieli:"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center"
+               FontSize="25"
+               Padding="0,40,0,0">
+            
+        </Label>
+        <Picker x:Name="LanguagePicker"
+                SelectedIndexChanged="LanguagePicker_SelectedIndexChanged"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                SelectedIndex="0"
+                FontSize="25"
+                WidthRequest="200"
+                HorizontalTextAlignment="Center"
+                Title="Valitse kieli">
+                    <Picker.Items>
+                        <x:String>Suomi</x:String>
+                        <x:String>English</x:String>
+                        <x:String>Svenska</x:String>
+                    </Picker.Items>
+        </Picker>
+
+
+
+        <Label 
+            Text="Koulu/Kunta:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="25"
+            Padding="0,50,0,0">
+
+        </Label>
+        <Picker
+            x:Name="KouluPicker"
+            SelectedIndexChanged="KouluPicker_SelectedIndexChanged"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            HorizontalTextAlignment="Center"
+            FontSize="25"
+            Title="Valitse koulu"
+            >
+            
+        </Picker>
+
+        <Entry
+            x:Name="KouluURLInput"
+            IsVisible="False"
+            Margin="10"
+            Placeholder="https://koulu.kouluruokalista.fi">
+        </Entry>
+        <Label
+            IsVisible="False"
+            x:Name="KehittajaLabel"
+            Text="Kehittäjätila aktivoitu, syötä palvelimen osoite yllä olevaan kenttään. Poistu kehittäjätilasta painamalla logoa 4 kertaa nopeasti."
+            TextColor="Red">
+           
+        </Label>
+
+        
+
+
+        <Button Clicked="Button_Clicked" Text="Valmis" Margin="0,40,0,0" FontSize="Body"></Button>
+    </VerticalStackLayout>
+</ContentPage>
