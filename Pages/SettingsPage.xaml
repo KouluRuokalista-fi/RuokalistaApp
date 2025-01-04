@@ -8,7 +8,8 @@
             Spacing="10"
             Padding="30,50"
             >
-
+            <Button x:Name="ChangeSchoolBtn" Text="Vaihda koulua" Padding="0, 10" Clicked="ChangeSchoolBtn_Clicked" BackgroundColor="{DynamicResource Primary}"></Button>
+            
 
             <VerticalStackLayout HorizontalOptions="Center" x:Name="TeemaStack">
                 <Label Text="Teema" FontSize="25" HorizontalOptions="Center"></Label>
@@ -44,36 +45,22 @@
             <Label HorizontalOptions="Center" FontSize="Caption">(Muutokset näkyvät uudelleenkäynnistyksen jälkeen)</Label>
 
 
-            <HorizontalStackLayout Padding="0, 10"></HorizontalStackLayout>
-            <Button x:Name="LoginButton" Text="Kirjaudu Hallintaan" Padding="0, 10" Clicked="Button_Clicked_1"></Button>
 
-            <HorizontalStackLayout Padding="0, 0"></HorizontalStackLayout>
-            <Button Text="Ilmoita bugeista" Clicked="Button_Clicked" Padding="0, 10"></Button>
 
+            
 
             <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize="15">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="Github.com/ArttuKuikka" TextDecorations="Underline" TextColor="Blue" />
+                        <Span Text="KouluRuokalista.fi" TextDecorations="Underline" TextColor="Blue" />
                     </FormattedString>
                 </Label.FormattedText>
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnLabelTapped" CommandParameter="gh" />
+                    <TapGestureRecognizer Tapped="OnLabelTapped" CommandParameter="kouluruokalista.fi" />
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize="15">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Ruokalista.ArttuKuikka.fi" TextDecorations="Underline" TextColor="Blue" />
-                    </FormattedString>
-                </Label.FormattedText>
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnLabelTapped" CommandParameter="rl" />
-                </Label.GestureRecognizers>
-            </Label>
-
-            <Label x:Name="CopyrightLabel" Text="© Arttu Kuikka 2024" HorizontalOptions="Center" VerticalOptions="End" FontSize="15" Padding="0, 30, 0, 0">
+            <Label x:Name="CopyrightLabel" Text="© Arttu Kuikka 2025" HorizontalOptions="Center" VerticalOptions="End" FontSize="15" Padding="0, 30, 0, 0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped" CommandParameter="secret" />
                 </Label.GestureRecognizers>

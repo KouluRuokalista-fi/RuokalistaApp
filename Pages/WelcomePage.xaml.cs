@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using Newtonsoft.Json;
 namespace RuokalistaApp.Pages;
 
@@ -34,12 +36,53 @@ public partial class WelcomePage : ContentPage
 
 	private void Button_Clicked(object sender, EventArgs e)
 	{
+		//validate dev url and set it to prefs
+		//kysy primarycolor
+		//kysy kasvisruoka
+		//setup notif channel
+		
+		if(Preferences.Default.Get("DevMode", false) == true)
+		{
+			if(string.IsNullOrEmpty(KouluURLInput.Text))
+			{
+				DisplayAlert("Virhe", "Palvelimen osoite ei voi olla tyhjä", "ok");
+				return;
+			}
+			else if(!KouluURLInput.Text.StartsWith("http") || !KouluURLInput.Text.StartsWith("https"))
+			{
+				DisplayAlert("Virhe", "Palvelimen osoite ei ole validi", "ok");
+				return;
+			}
+			else
+			{
+				Preferences.Default.Set("School", KouluURLInput.Text);
+			}
+		}
+		else if(KouluPicker.SelectedItem == null)
+		{
+			string text = "Valitse koulu (pakollinen)";
+			ToastDuration duration = ToastDuration.Short;
+			double fontSize = 15;
+
+			var toast = Toast.Make(text, duration, fontSize);
+
+			toast.Show();
+			return;
+		}
+
+
+		App.SetCurrentAppColor("#0415d6");
+
+
+
 		Application.Current.MainPage = new AppShell();
 	}
 
 	private void LanguagePicker_SelectedIndexChanged(object sender, EventArgs e)
 	{
 		Preferences.Default.Set("Lang", LanguagePicker.SelectedItem.ToString());
+
+		//TODO: set th app lang
 	}
 
 	private void KouluPicker_SelectedIndexChanged(object sender, EventArgs e)

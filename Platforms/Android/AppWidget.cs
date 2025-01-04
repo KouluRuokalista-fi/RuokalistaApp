@@ -119,7 +119,7 @@ namespace RuokalistaApp
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (File.Exists(Path.Combine(FileSystem.Current.CacheDirectory, "ruoka.json")) && File.ReadAllText(Path.Combine(FileSystem.Current.CacheDirectory, "ruoka.json")) != null)
                 {

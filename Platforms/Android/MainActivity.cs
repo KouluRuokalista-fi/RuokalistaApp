@@ -14,11 +14,11 @@ public class MainActivity : MauiAppCompatActivity
 
         CreateNotificationChannel();
 
-        
-    }
+	}
 
 
-    private void CreateNotificationChannel()
+
+	private void CreateNotificationChannel()
     {
         var isFirstTime = Preferences.Get("IsFirstTime", true);
 

@@ -6,15 +6,7 @@ public partial class VotePage : ContentPage
 	{
 		InitializeComponent();
 
-		var isDev = Preferences.Default.Get("IsDeveloper", false);
-		if (isDev)
-		{
-			webview1.Source = "https://ruokalistadev.arttukuikka.fi/Aanestys/Tulokset?isApp=true";
-		}
-		else
-		{
-			webview1.Source = "https://ruokalista.arttukuikka.fi/Aanestys/Tulokset?isApp=true";
-		}
+		webview1.Source = "https://" + Preferences.Get("School", "") + "/Aanestys/Tulokset?isApp=true";
 	}
 
     private void RefreshView_Refreshing(object sender, EventArgs e)

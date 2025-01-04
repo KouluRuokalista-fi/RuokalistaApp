@@ -30,12 +30,9 @@ public partial class MainPage : ContentPage
 
     public async Task Load(VerticalStackLayout stack, bool kasvisruoka = false)
     {
-		string baseAddress = "https://ruokalista.arttukuikka.fi";
+		string baseAddress = "https://" + Preferences.Get("School", "");
 
-        if(Preferences.Default.Get("IsDeveloper", false) == true)
-        {
-			baseAddress = "https://ruokalistadev.arttukuikka.fi";
-		}
+        
 
 		bool showingNextWeeksMenu = false;
 
