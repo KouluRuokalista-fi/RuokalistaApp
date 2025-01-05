@@ -71,7 +71,7 @@ public partial class WelcomePage : ContentPage
 		}
 
 
-		App.SetCurrentAppColor("#0415d6");
+		App.SetCurrentAppColor("#ffa500");
 
 
 

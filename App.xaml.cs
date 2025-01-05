@@ -6,6 +6,7 @@ public partial class App : Application
 {
 	public App()
 	{
+		
 		if (Preferences.Default.ContainsKey("Teema"))
 		{
 			var key = Preferences.Default.Get("Teema", 0);

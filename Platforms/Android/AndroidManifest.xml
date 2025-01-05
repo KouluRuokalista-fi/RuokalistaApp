@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="fi.KouluRuokalista.Ruokalista" android:versionCode="1" android:versionName="1">
-	<application android:allowBackup="false" android:icon="@mipmap/logo_fix" android:label="KouluRuokalista.fi" android:supportsRtl="true">
+	<application android:allowBackup="false" android:label="KouluRuokalista.fi" android:supportsRtl="true" android:icon="@mipmap/logo_v2">
 		<receiver android:name="com.arttu.ruokalista.AppWidget" android:exported="true" android:label="Ruokalista">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
