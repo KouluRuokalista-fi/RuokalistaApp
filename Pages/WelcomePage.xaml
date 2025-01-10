@@ -85,9 +85,19 @@
            
         </Label>
 
+
+        <Button x:Name="ActionButton" 
+     Clicked="Button_Clicked" 
+     Text="Valmis" 
+     FontSize="Body" 
+     Margin="0,40,0,0" />
+
+        <ActivityIndicator x:Name="Loader" 
+                   IsRunning="False" 
+                   IsVisible="False" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center" />
         
 
-
-        <Button Clicked="Button_Clicked" Text="Valmis" Margin="0,40,0,0" FontSize="Body"></Button>
     </VerticalStackLayout>
 </ContentPage>

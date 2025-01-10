@@ -6,9 +6,9 @@
     <ScrollView>
         <VerticalStackLayout
             Spacing="10"
-            Padding="30,50"
+            Padding="20,30"
             >
-            <Button x:Name="ChangeSchoolBtn" Text="Vaihda koulua" Padding="0, 10" Clicked="ChangeSchoolBtn_Clicked" BackgroundColor="{DynamicResource Primary}"></Button>
+            <Button x:Name="ChangeSchoolBtn" Text="Vaihda koulua" Padding="0, 10" Margin="0, 0, 0 ,15" Clicked="ChangeSchoolBtn_Clicked" BackgroundColor="{DynamicResource Primary}"></Button>
             
 
             <VerticalStackLayout HorizontalOptions="Center" x:Name="TeemaStack">

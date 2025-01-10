@@ -103,10 +103,13 @@ public partial class SettingsPage : ContentPage
 	private void ChangeSchoolBtn_Clicked(object sender, EventArgs e)
 	{
 		//remove all currently set environment variables
+		Preferences.Clear();
 		//unregister notif channel
+		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
 		//throw back to welcome
+		
+		App.SetCurrentAppColor("#0074ff");
+		Application.Current.MainPage = new WelcomePage();
 
-		var color = "#05fc1d";
-		Application.Current.Resources["Primary"] = Color.FromArgb(color);
 	}
 }

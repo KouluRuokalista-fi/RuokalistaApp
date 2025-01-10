@@ -34,23 +34,26 @@ public partial class WelcomePage : ContentPage
 
 	}
 
-	private void Button_Clicked(object sender, EventArgs e)
+	private async void Button_Clicked(object sender, EventArgs e)
 	{
+		Loader.IsVisible = true;
+		Loader.IsRunning = true;
+		ActionButton.IsEnabled = false;
 		//validate dev url and set it to prefs
 		//kysy primarycolor
 		//kysy kasvisruoka
 		//setup notif channel
-		
-		if(Preferences.Default.Get("DevMode", false) == true)
+
+		if (Preferences.Default.Get("DevMode", false) == true)
 		{
 			if(string.IsNullOrEmpty(KouluURLInput.Text))
 			{
-				DisplayAlert("Virhe", "Palvelimen osoite ei voi olla tyhjä", "ok");
+				await DisplayAlert("Virhe", "Palvelimen osoite ei voi olla tyhjä", "ok");
 				return;
 			}
 			else if(!KouluURLInput.Text.StartsWith("http") || !KouluURLInput.Text.StartsWith("https"))
 			{
-				DisplayAlert("Virhe", "Palvelimen osoite ei ole validi", "ok");
+				await DisplayAlert("Virhe", "Palvelimen osoite ei ole validi", "ok");
 				return;
 			}
 			else
@@ -66,16 +69,32 @@ public partial class WelcomePage : ContentPage
 
 			var toast = Toast.Make(text, duration, fontSize);
 
-			toast.Show();
+			await toast.Show();
 			return;
 		}
 
 
-		App.SetCurrentAppColor("#ffa500");
+		//TODO register notif channels and set the env
+		try
+		{
+			var ServerConfig = await Config.GetServerConfig(Preferences.Default.Get("School", ""));
+			var primaryColor = ServerConfig["primaryColor"] ?? "#0074ff";
+			App.SetCurrentAppColor(primaryColor);
+			Preferences.Default.Set("PrimaryColor", primaryColor);
+
+			Preferences.Default.Set("SetupDone", true);
+
+			Application.Current.MainPage = new AppShell();
 
 
-
-		Application.Current.MainPage = new AppShell();
+		}
+		catch(Exception ex)
+		{
+			await DisplayAlert("Virhe", ex.Message, "ok");
+			Loader.IsVisible = false;
+			Loader.IsRunning = false;
+			ActionButton.IsEnabled = true;
+		}
 	}
 
 	private void LanguagePicker_SelectedIndexChanged(object sender, EventArgs e)

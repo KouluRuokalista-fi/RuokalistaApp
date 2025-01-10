@@ -31,7 +31,7 @@ public partial class App : Application
 		{
 			Application.Current.MainPage = new AppShell();
 
-			var color = Preferences.Get("PrimaryColor", "#0244ea");//VAIHA TÄNNE OIKEA DEFAULT VÄRI VÄRI!!!!!!!!
+			var color = Preferences.Get("PrimaryColor", "#0074ff");
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
 			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
