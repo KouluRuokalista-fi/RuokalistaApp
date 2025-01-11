@@ -19,17 +19,26 @@ namespace RuokalistaApp.Pages;
 
 public partial class SettingsPage : ContentPage
 {
-    private static int SecretCounter = 0;
+	private bool _isInitializing = true;
 	public SettingsPage()
 	{
 		InitializeComponent();
 
-        CopyrightLabel.Text = $"© {DateTime.Now.Year} Arttu Kuikka";
+        CopyrightLabel.Text = $"© {DateTime.Now.Year} Kouluruokalista.fi";
 
 		ThemePicker.SelectedIndex = Preferences.Default.Get("Teema", 0);
         
+		if(Preferences.Get("kasvisruokalistaEnabled", true))
+		{
+			PiilotaKasvisruokalista.IsToggled = Preferences.Get("NaytaKasvis", true);
+		}
+		else
+		{
+			PiilotaKasvisruokalista.IsToggled = false;
+			PiilotaKasvisruokalista.IsEnabled = false;
+		}
 
-		PiilotaKasvisruokalista.IsToggled = Preferences.Get("PiilotaKasvis", false);
+		_isInitializing = false;
 	}
 
 	
@@ -95,9 +104,9 @@ public partial class SettingsPage : ContentPage
 
 	private void PiilotaKasvisruokalista_Toggled(object sender, ToggledEventArgs e)
 	{
-		Preferences.Set("PiilotaKasvis", e.Value);
-		//TODO: application.jotain et tekee heti eikä uudelleenkäynnistyksen jälkee
-
+		if (_isInitializing) return;
+		Preferences.Set("NaytaKasvis", e.Value);
+		App.Current.MainPage = new AppShell();
 	}
 
 	private void ChangeSchoolBtn_Clicked(object sender, EventArgs e)

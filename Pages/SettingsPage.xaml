@@ -39,7 +39,7 @@
             <Label Text="Muuta" FontSize="25" HorizontalOptions="Center"></Label>
             
             <Grid ColumnDefinitions="*,Auto">
-                <Label VerticalOptions="Center" FontSize="Body" Text="Piilota kasvisruokalista" Grid.Column="0" />
+                <Label VerticalOptions="Center" FontSize="Body" Text="Näytä kasvisruokalista" Grid.Column="0" />
                 <Switch IsToggled="False" Scale="1.2" x:Name="PiilotaKasvisruokalista" Grid.Column="1" HorizontalOptions="End" Toggled="PiilotaKasvisruokalista_Toggled" />
             </Grid>
             <Label HorizontalOptions="Center" FontSize="Caption">(Muutokset näkyvät uudelleenkäynnistyksen jälkeen)</Label>
@@ -60,7 +60,7 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label x:Name="CopyrightLabel" Text="© Arttu Kuikka 2025" HorizontalOptions="Center" VerticalOptions="End" FontSize="15" Padding="0, 30, 0, 0">
+            <Label x:Name="CopyrightLabel" Text="© Kouluruokalista.fi 2025" HorizontalOptions="Center" VerticalOptions="End" FontSize="15" Padding="0, 30, 0, 0">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnLabelTapped" CommandParameter="secret" />
                 </Label.GestureRecognizers>

@@ -81,6 +81,7 @@ public partial class WelcomePage : ContentPage
 			var primaryColor = ServerConfig["primaryColor"] ?? "#0074ff";
 			App.SetCurrentAppColor(primaryColor);
 			Preferences.Default.Set("PrimaryColor", primaryColor);
+			Preferences.Default.Set("kasvisruokalistaEnabled", bool.Parse(ServerConfig["kasvisruokalistaEnabled"] ?? "false"));
 
 			Preferences.Default.Set("SetupDone", true);
 
