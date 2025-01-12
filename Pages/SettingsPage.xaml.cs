@@ -131,7 +131,7 @@ public partial class SettingsPage : ContentPage
 		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
 		//throw back to welcome
 		
-		App.SetCurrentAppColor("#0074ff");
+		App.SetCurrentAppColor(Config.PrimaryFallbackColor);
 		Application.Current.MainPage = new WelcomePage();
 
 	}

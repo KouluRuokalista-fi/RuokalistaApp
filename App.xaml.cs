@@ -31,7 +31,7 @@ public partial class App : Application
 		{
 			Application.Current.MainPage = new AppShell();
 
-			var color = Preferences.Get("PrimaryColor", "#0074ff");
+			var color = Preferences.Get("PrimaryColor", Config.PrimaryFallbackColor);
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
 			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
@@ -39,7 +39,7 @@ public partial class App : Application
 		{
 			Application.Current.MainPage = new WelcomePage();
 
-			var color = "#0074ff";
+			var color = Config.PrimaryFallbackColor;
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
 			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}

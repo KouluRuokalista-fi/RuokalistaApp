@@ -36,9 +36,9 @@ public partial class AppShell : Shell
 		try
 		{
 			var ServerConfig = await Task.Run(() => Config.GetServerConfig(Preferences.Default.Get("School", "")));
-			var primaryColor = ServerConfig["primaryColor"] ?? "#0074ff";
+			var primaryColor = ServerConfig["primaryColor"] ?? Config.PrimaryFallbackColor;
 
-			if(Preferences.Default.Get("PrimaryColor", "#0074ff") != primaryColor)
+			if(Preferences.Default.Get("PrimaryColor", Config.PrimaryFallbackColor) != primaryColor)
 			{
 				App.SetCurrentAppColor(primaryColor);
 				Preferences.Default.Set("PrimaryColor", primaryColor);
