@@ -134,7 +134,7 @@
 		<MauiIcon Include="Resources\AppIcon\logo_v2.svg" Color="#0074ff" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Images\logo.png"  BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Images\logo.png" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -205,7 +205,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Platforms\Android\Resources\values\" />
+	  <Folder Include="Platforms\Android\Resources\" />
 	</ItemGroup>
 
 </Project>
