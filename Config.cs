@@ -15,7 +15,7 @@ namespace RuokalistaApp
 
 			//get the config from the json api
 			HttpClient client = new HttpClient();
-			client.BaseAddress = new Uri("https://" + url);
+			client.BaseAddress = new Uri(url);
 			var request = "/api/v1/App/Config";
 			HttpResponseMessage response = await client.GetAsync(request);
 			if (response.IsSuccessStatusCode)

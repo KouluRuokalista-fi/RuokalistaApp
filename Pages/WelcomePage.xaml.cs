@@ -108,7 +108,7 @@ public partial class WelcomePage : ContentPage
 	private void KouluPicker_SelectedIndexChanged(object sender, EventArgs e)
 	{
 		var selectedSchool = Endpoints.Where(x => x.name == KouluPicker.SelectedItem.ToString()).First();
-		Preferences.Default.Set("School", selectedSchool.url);
+		Preferences.Default.Set("School", "https://" + selectedSchool.url);
 	}
 
 	private class Endpoint

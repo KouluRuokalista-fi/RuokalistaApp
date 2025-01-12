@@ -32,11 +32,7 @@ public partial class SettingsPage : ContentPage
 		{
 			PiilotaKasvisruokalista.IsToggled = Preferences.Get("NaytaKasvis", true);
 		}
-		else
-		{
-			PiilotaKasvisruokalista.IsToggled = false;
-			PiilotaKasvisruokalista.IsEnabled = false;
-		}
+		
 
 		_isInitializing = false;
 	}
@@ -102,9 +98,27 @@ public partial class SettingsPage : ContentPage
 #endif
 	}
 
-	private void PiilotaKasvisruokalista_Toggled(object sender, ToggledEventArgs e)
+	private async void PiilotaKasvisruokalista_Toggled(object sender, ToggledEventArgs e)
 	{
+		//prevent the event from firing when the page is initializing
 		if (_isInitializing) return;
+
+		//if kasvisruokalista is not disabled on the server, prevent the user from enabling it
+		if (!Preferences.Get("kasvisruokalistaEnabled", true))
+		{
+			PiilotaKasvisruokalista.IsToggled = false;
+
+			string text = "Ominaisuus ei ole saatavilla tällä palvelimella";
+			ToastDuration duration = ToastDuration.Long;
+			double fontSize = 15;
+
+			var toast = Toast.Make(text, duration, fontSize);
+
+			await toast.Show();
+			return;
+		}
+
+		//show the page
 		Preferences.Set("NaytaKasvis", e.Value);
 		App.Current.MainPage = new AppShell();
 	}

@@ -30,7 +30,7 @@ public partial class MainPage : ContentPage
 
     public async Task Load(VerticalStackLayout stack, bool kasvisruoka = false)
     {
-		string baseAddress = "https://" + Preferences.Get("School", "");
+		string baseAddress = Preferences.Get("School", "");
 
         
 

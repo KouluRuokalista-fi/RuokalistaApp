@@ -6,7 +6,7 @@ public partial class VotePage : ContentPage
 	{
 		InitializeComponent();
 
-		webview1.Source = "https://" + Preferences.Get("School", "") + "/Aanestys/Tulokset?isApp=true";
+		webview1.Source = Preferences.Get("School", "") + "/Aanestys/Tulokset?isApp=true";
 	}
 
     private void RefreshView_Refreshing(object sender, EventArgs e)
