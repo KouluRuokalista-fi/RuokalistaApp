@@ -38,6 +38,10 @@ public partial class App : Application
 		else
 		{
 			Application.Current.MainPage = new WelcomePage();
+
+			var color = "#0074ff";
+			Application.Current.Resources["Primary"] = Color.FromArgb(color);
+			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
 
 	}
