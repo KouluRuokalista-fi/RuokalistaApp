@@ -4,11 +4,9 @@ namespace RuokalistaApp;
 
 public partial class AppShell : Shell
 {
-	public static TabBar PublicTabBar;
 	public AppShell()
 	{
 		InitializeComponent();
-		PublicTabBar = tabbar;
 
 		Routing.RegisterRoute("SeuraavaViikko", typeof(NextWeekPage));
         Routing.RegisterRoute("Main", typeof(MainPage));
