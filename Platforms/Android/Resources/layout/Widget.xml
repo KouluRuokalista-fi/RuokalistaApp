@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+	android:padding="0dp">
+
+	<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_background"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+		<TextView
+            android:id="@+id/Maanantai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Maanantai: "
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+			android:layout_marginTop="2dp"
+			android:gravity="center"/>
+
+		<TextView
+            android:id="@+id/Tiistai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiistai: "
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+			android:layout_marginTop="2dp"
+			android:gravity="center"/>
+
+		<TextView
+            android:id="@+id/Keskiviikko"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keskiviikko: "
+            android:textColor="#ffffff"
+            android:layout_marginTop="2dp"
+            android:textSize="14sp"
+			android:gravity="center"/>
+
+		<TextView
+            android:id="@+id/Torstai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Torstai: "
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+			android:layout_marginTop="2dp"
+			android:gravity="center"/>
+
+		<TextView
+            android:id="@+id/Perjantai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perjantai: "
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+			android:layout_marginTop="2dp"
+			android:gravity="center"/>
+	</LinearLayout>
+</RelativeLayout>

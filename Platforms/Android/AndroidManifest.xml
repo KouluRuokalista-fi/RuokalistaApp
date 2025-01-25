@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="fi.KouluRuokalista.Ruokalista" android:versionCode="1" android:versionName="1">
 	<application android:allowBackup="false" android:label="KouluRuokalista.fi" android:supportsRtl="true" android:icon="@mipmap/logo_v2">
-		<receiver android:name="com.arttu.ruokalista.AppWidget" android:exported="true" android:label="Ruokalista">
+		<receiver android:name="fi.KouluRuokalista.Ruokalista.AppWidget" android:exported="true" android:label="Ruokalista">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 			</intent-filter>
@@ -12,7 +12,6 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.CAMERA" />
 	<queries>
 		<intent>
 			<action android:name="android.intent.action.SENDTO" />

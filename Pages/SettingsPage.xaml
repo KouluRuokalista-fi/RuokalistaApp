@@ -7,8 +7,11 @@
         <VerticalStackLayout
             Spacing="10"
             Padding="20,30"
+            MaximumWidthRequest="700"
             >
-            <Button x:Name="ChangeSchoolBtn" Text="Vaihda koulua" Padding="0, 10" Margin="0, 0, 0 ,15" Clicked="ChangeSchoolBtn_Clicked" BackgroundColor="{DynamicResource Primary}"></Button>
+            <Button x:Name="ChangeSchoolBtn" Text="Vaihda koulua/kieltä" Padding="0, 10" Margin="0, 0, 0 ,15" Clicked="ChangeSchoolBtn_Clicked" BackgroundColor="{DynamicResource Primary}"></Button>
+            
+            
             
 
             <VerticalStackLayout HorizontalOptions="Center" x:Name="TeemaStack">

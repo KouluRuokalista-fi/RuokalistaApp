@@ -135,4 +135,9 @@ public partial class SettingsPage : ContentPage
 		Application.Current.MainPage = new WelcomePage();
 
 	}
+
+	private void LanguagePicker_SelectedIndexChanged(object sender, EventArgs e)
+	{
+
+    }
 }

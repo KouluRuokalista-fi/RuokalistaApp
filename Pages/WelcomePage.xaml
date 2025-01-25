@@ -44,8 +44,8 @@
              Title="Valitse kieli">
                 <Picker.Items>
                     <x:String>Suomi</x:String>
-                    <x:String>English</x:String>
-                    <x:String>Svenska</x:String>
+                    <!-- <x:String>English</x:String> -->
+                    <!-- <x:String>Svenska</x:String> -->
                 </Picker.Items>
             </Picker>
 

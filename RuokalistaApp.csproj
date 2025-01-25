@@ -148,9 +148,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\Resources\drawable\widgetpreview.jpg" />
-	  <None Remove="Platforms\Android\Resources\layout\Widget.axml" />
-	  <None Remove="Platforms\Android\Resources\xml\appwidgetprovider.xml" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\menu.png" />
 	  <None Remove="Resources\Images\settings.png" />
@@ -202,10 +199,6 @@
 		<PackageReference Include="Xamarin.Firebase.Messaging" Version="123.1.1.1" />
 		<PackageReference Include="Xamarin.Google.Dagger" Version="2.44.2.1" />
 		<PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.1.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Platforms\Android\Resources\" />
 	</ItemGroup>
 
 </Project>

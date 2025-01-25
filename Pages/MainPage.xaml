@@ -8,6 +8,7 @@
             Spacing="10"
             Padding="30,20"
             VerticalOptions="Start"
+            MaximumWidthRequest="700"
             x:Name="MainStack">
 
 
