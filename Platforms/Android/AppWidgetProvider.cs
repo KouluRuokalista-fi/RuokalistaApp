@@ -141,7 +141,7 @@ namespace RuokalistaApp.Platforms.Android
 		private string TrimText(string text)
 		{
 			if (string.IsNullOrEmpty(text)) return string.Empty;
-			return text.Length > 75 ? text.Substring(0, 75) + "..." : text;
+			return text.Length > 75 ? text.Substring(0, 100) + "..." : text;
 		}
 	}
 }
