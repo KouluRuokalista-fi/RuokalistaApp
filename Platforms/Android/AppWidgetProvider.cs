@@ -11,7 +11,7 @@ using Color = Android.Graphics.Color;
 
 namespace RuokalistaApp.Platforms.Android
 {
-	[BroadcastReceiver(Label = "Menu of the Week", Exported = true)]
+	[BroadcastReceiver(Label = "Viikon ruokalista", Exported = true)]
 	[IntentFilter(new string[] { "android.appwidget.action.APPWIDGET_UPDATE" })]
 	[MetaData("android.appwidget.provider", Resource = "@xml/appwidgetprovider")]
 	public class AppWidget : AppWidgetProvider
