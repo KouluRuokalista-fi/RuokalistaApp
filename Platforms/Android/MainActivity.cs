@@ -24,22 +24,12 @@ public class MainActivity : MauiAppCompatActivity
 
         if(isFirstTime)
         {
-			//poista vanha ruokalista firebasetopic
-			FirebaseMessaging.Instance.UnsubscribeFromTopic("Ilmoitukset");
-
-			FirebaseMessaging.Instance.SubscribeToTopic("Isokyro");
+			
 
 			if (OperatingSystem.IsOSPlatformVersionAtLeast("android", 26))
 			{
 				var notificationmanager = (NotificationManager)GetSystemService(Android.Content.Context.NotificationService);
 
-                //poista vanha ruokalista kanava
-                try
-                {
-					notificationmanager.DeleteNotificationChannel("Main");
-				}
-                catch(Exception)
-                { }
 
 				notificationmanager.CreateNotificationChannel(new NotificationChannel("Ruokalista", "Ruokalista", NotificationImportance.Default));
 				notificationmanager.CreateNotificationChannel(new NotificationChannel("Kasvisruokalista", "Kasvisruokalista", NotificationImportance.None));

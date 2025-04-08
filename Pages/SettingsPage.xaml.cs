@@ -130,10 +130,13 @@ public partial class SettingsPage : ContentPage
 
 	private void ChangeSchoolBtn_Clicked(object sender, EventArgs e)
 	{
+		//unregister notification topic
+		var topic = Preferences.Get("School", "").Replace("https://", "");
+		FirebaseMessaging.Instance.UnsubscribeFromTopic(topic);
+
 		//remove all currently set environment variables
 		Preferences.Clear();
-		//unregister notif channel
-		//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 		//throw back to welcome
 		
 		App.SetCurrentAppColor(Config.PrimaryFallbackColor);

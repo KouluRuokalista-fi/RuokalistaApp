@@ -1,6 +1,7 @@
 using AndroidX.ConstraintLayout.Utils.Widget;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using Firebase.Messaging;
 using Newtonsoft.Json;
 namespace RuokalistaApp.Pages;
 
@@ -86,7 +87,22 @@ public partial class WelcomePage : ContentPage
 		}
 
 
-		//TODO register notif channels and set the env
+		//register notif channel
+		try
+		{
+			FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
+			var selectedSchool = Endpoints.Where(x => x.name == KouluPicker.SelectedItem.ToString()).First();
+			FirebaseMessaging.Instance.SubscribeToTopic(selectedSchool.url); //format: isokyro.kouluruokalista.fi
+		}
+		catch (Exception)
+		{
+			string text = "Virhe liityessä ilmoituspalvelimelle. Jos ilmoitukset eivät toimi, asenna sovellus uudelleen!";
+			ToastDuration duration = ToastDuration.Long;
+			double fontSize = 15;
+
+			var toast = Toast.Make(text, duration, fontSize);
+		}
+		
 		try
 		{
 			var ServerConfig = await Config.GetServerConfig(Preferences.Default.Get("School", ""));
