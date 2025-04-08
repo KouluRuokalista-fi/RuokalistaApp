@@ -46,6 +46,10 @@
                 <Switch IsToggled="False" Scale="1.2" x:Name="PiilotaKasvisruokalista" Grid.Column="1" HorizontalOptions="End" Toggled="PiilotaKasvisruokalista_Toggled" />
             </Grid>
 
+            <Grid ColumnDefinitions="*,Auto">
+                <Label VerticalOptions="Center" FontSize="Body" Text="Näytä kasvisruokalista widgetissä" Grid.Column="0" />
+                <Switch IsToggled="False" Scale="1.2" x:Name="NaytaKasvisWidgetissa" Grid.Column="1" HorizontalOptions="End" Toggled="NaytaKasvisWidgetissa_Toggled" />
+            </Grid>
 
 
 

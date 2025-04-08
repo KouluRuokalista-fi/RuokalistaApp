@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System.Net;
+using Android.App;
 using Android.Appwidget;
 using Android.Content;
 using Android.Widget;
@@ -8,6 +9,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Android.Graphics;
 using Color = Android.Graphics.Color;
+using Java.Time;
+using Java.Net;
+using static Android.Gms.Common.Apis.Api;
+using Android.Health.Connect.DataTypes;
+using DayOfWeek = System.DayOfWeek;
 
 namespace RuokalistaApp.Platforms.Android
 {
@@ -16,7 +22,7 @@ namespace RuokalistaApp.Platforms.Android
 	[MetaData("android.appwidget.provider", Resource = "@xml/appwidgetprovider")]
 	public class AppWidget : AppWidgetProvider
 	{
-		private readonly string ApiUrl = Preferences.Get("School", "") + "/api/v1/ruokalista";
+		
 
 		public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
 		{
@@ -28,44 +34,133 @@ namespace RuokalistaApp.Platforms.Android
 
 		private async void UpdateWidget(Context context, AppWidgetManager appWidgetManager, int widgetId)
 		{
+
 			var remoteViews = new RemoteViews(context.PackageName, Resource.Layout.Widget);
 			try
 			{
-				string menuData = await FetchMenuData();
+				// Create an intent to open the app
+				Intent intent = new Intent(context, typeof(MainActivity));
+				intent.AddFlags(ActivityFlags.NewTask);
+				PendingIntent pendingIntent = PendingIntent.GetActivity(context, 0, intent,
+					PendingIntentFlags.UpdateCurrent | PendingIntentFlags.Immutable);
+				remoteViews.SetOnClickPendingIntent(Resource.Id.widget_root, pendingIntent);
+			}
+			catch (Exception)
+			{
 
-				if (menuData != null)
+			}
+
+			//check if school is selected
+			if (!Preferences.ContainsKey("School"))
+			{
+				SetErrorText(remoteViews, "Valitse koulusi sovelluksesta");
+				appWidgetManager.UpdateAppWidget(widgetId, remoteViews);
+				return;
+
+			}
+
+
+			var currentWeek = System.Globalization.ISOWeek.GetWeekOfYear(DateTime.Now);
+
+			//check if next week should be shown
+			//here might be a problem with the last week of the year
+			if (IsWeekendOrFridayAfternoon())
+			{
+				currentWeek += 1;
+			}
+
+			//fetch data
+			var apiurl = Preferences.Get("School", "") + $"/api/v1/Ruokalista/{DateTime.Now.Year}/{currentWeek}";
+			if (Preferences.Get("NaytaKasvisWidgetissa", false))
+			{
+				apiurl = Preferences.Get("School", "") + $"/api/v1/KasvisRuokalista/{DateTime.Now.Year}/{currentWeek}";
+			}
+
+			try
+			{
+				using var client = new HttpClient();
+				HttpResponseMessage response = await client.GetAsync(apiurl);
+				if (response.IsSuccessStatusCode)
 				{
-					var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
+					var menuData = await response.Content.ReadAsStringAsync();
+					//success
+					try
+					{
+						var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
 
-					remoteViews.SetTextViewText(Resource.Id.Maanantai, $"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
-					remoteViews.SetTextViewText(Resource.Id.Tiistai, $"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
-					remoteViews.SetTextViewText(Resource.Id.Keskiviikko, $"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
-					remoteViews.SetTextViewText(Resource.Id.Torstai, $"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
-					remoteViews.SetTextViewText(Resource.Id.Perjantai, $"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
+						//data is correct, display and save:
 
-					HighlightDay(Menu, remoteViews);
+						remoteViews.SetTextViewText(Resource.Id.Maanantai,
+							$"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
+						remoteViews.SetTextViewText(Resource.Id.Tiistai,
+							$"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
+						remoteViews.SetTextViewText(Resource.Id.Keskiviikko,
+							$"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
+						remoteViews.SetTextViewText(Resource.Id.Torstai,
+							$"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
+						remoteViews.SetTextViewText(Resource.Id.Perjantai,
+							$"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
+
+						HighlightDay(Menu, remoteViews);
+
+						//save to cache
+						await File.WriteAllTextAsync(System.IO.Path.Combine(FileSystem.Current.CacheDirectory, "widgetCache.json"), menuData);
+					}
+					catch(Exception)
+					{
+						//data was not in the correct format or broken
+						//try cache load 
+						try
+						{
+							menuData = await File.ReadAllTextAsync(System.IO.Path.Combine(FileSystem.Current.CacheDirectory, "widgetCache.json"));
+
+							var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
+
+							//data in cache is correct, display:
+
+							remoteViews.SetTextViewText(Resource.Id.Maanantai,
+								$"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
+							remoteViews.SetTextViewText(Resource.Id.Tiistai,
+								$"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
+							remoteViews.SetTextViewText(Resource.Id.Keskiviikko,
+								$"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
+							remoteViews.SetTextViewText(Resource.Id.Torstai,
+								$"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
+							remoteViews.SetTextViewText(Resource.Id.Perjantai,
+								$"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
+
+							HighlightDay(Menu, remoteViews);
+
+						}
+						catch (Exception)
+						{
+							//cache load failure
+							SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa");
+						}
+
+
+
+						
+						
+					}
+				}
+
+				else if (response.StatusCode == HttpStatusCode.NotFound)
+				{
+					SetErrorText(remoteViews, "Tämän viikon ruokalistaa ei ole vielä olemassa");
 				}
 				else
 				{
-					remoteViews.SetTextViewText(Resource.Id.Maanantai, "Virhe ladatessa ruokalistaa");
-					remoteViews.SetTextViewText(Resource.Id.Tiistai, "");
-					remoteViews.SetTextViewText(Resource.Id.Keskiviikko, "");
-					remoteViews.SetTextViewText(Resource.Id.Torstai, "");
-					remoteViews.SetTextViewText(Resource.Id.Perjantai, "");
-					if (!Preferences.ContainsKey("School"))
-					{
-						remoteViews.SetTextViewText(Resource.Id.Maanantai, "Valitse koulusi sovelluksesta");
-					}
+					//virhe
+					SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa: " + response.StatusCode.ToString());
 				}
 			}
-			catch(Exception ex)
+			catch (Exception)
 			{
-				remoteViews.SetTextViewText(Resource.Id.Maanantai, "Virhe ladatessa ruokalistaa");
-				remoteViews.SetTextViewText(Resource.Id.Tiistai, "Virhe:\n" + ex.Message);
-				remoteViews.SetTextViewText(Resource.Id.Keskiviikko, "");
-				remoteViews.SetTextViewText(Resource.Id.Torstai, "");
-				remoteViews.SetTextViewText(Resource.Id.Perjantai, "");
+				SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa!");
 			}
+
+			
 
 			appWidgetManager.UpdateAppWidget(widgetId, remoteViews);
 		}
@@ -125,17 +220,30 @@ namespace RuokalistaApp.Platforms.Android
 
 		}
 
-		private async Task<string> FetchMenuData()
+		private void SetErrorText(RemoteViews remoteViews, string errorMessage)
 		{
-			try
-			{
-				using var client = new HttpClient();
-				return await client.GetStringAsync(ApiUrl);
-			}
-			catch
-			{
-				return null;
-			}
+			remoteViews.SetTextViewText(Resource.Id.Maanantai, errorMessage);
+			remoteViews.SetTextViewText(Resource.Id.Tiistai, "");
+			remoteViews.SetTextViewText(Resource.Id.Keskiviikko, "");
+			remoteViews.SetTextViewText(Resource.Id.Torstai, "");
+			remoteViews.SetTextViewText(Resource.Id.Perjantai, "");
+		}
+
+		
+
+		public static bool IsWeekendOrFridayAfternoon()
+		{
+			// Get current date and time
+			DateTime now = DateTime.Now;
+
+			// Check if it's Friday and after 12:00
+			bool isFridayAfternoon = now.DayOfWeek == DayOfWeek.Friday && now.TimeOfDay.TotalHours >= 12;
+
+			// Check if it's weekend (Saturday or Sunday)
+			bool isWeekend = now.DayOfWeek == DayOfWeek.Saturday || now.DayOfWeek == DayOfWeek.Sunday;
+
+			// Return true if either condition is met
+			return isFridayAfternoon || isWeekend;
 		}
 
 		private string TrimText(string text)

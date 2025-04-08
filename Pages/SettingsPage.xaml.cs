@@ -32,6 +32,11 @@ public partial class SettingsPage : ContentPage
 		{
 			PiilotaKasvisruokalista.IsToggled = Preferences.Get("NaytaKasvis", true);
 		}
+
+		if (Preferences.Get("NaytaKasvisWidgetissa", false))
+		{
+			NaytaKasvisWidgetissa.IsToggled = Preferences.Get("NaytaKasvisWidgetissa", false);
+		}
 		
 
 		_isInitializing = false;
@@ -140,4 +145,9 @@ public partial class SettingsPage : ContentPage
 	{
 
     }
+
+	private void NaytaKasvisWidgetissa_Toggled(object sender, ToggledEventArgs e)
+	{
+		Preferences.Set("NaytaKasvisWidgetissa", e.Value);
+	}
 }
