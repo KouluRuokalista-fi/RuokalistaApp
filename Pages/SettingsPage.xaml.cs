@@ -146,8 +146,26 @@ public partial class SettingsPage : ContentPage
 
     }
 
-	private void NaytaKasvisWidgetissa_Toggled(object sender, ToggledEventArgs e)
+	private async void NaytaKasvisWidgetissa_Toggled(object sender, ToggledEventArgs e)
 	{
+		//prevent the event from firing when the page is initializing
+		if (_isInitializing) return;
+
+		//if kasvisruokalista is not disabled on the server, prevent the user from enabling it
+		if (!Preferences.Get("kasvisruokalistaEnabled", true))
+		{
+			NaytaKasvisWidgetissa.IsToggled = false;
+
+			string text = "Ominaisuus ei ole saatavilla tällä palvelimella";
+			ToastDuration duration = ToastDuration.Long;
+			double fontSize = 15;
+
+			var toast = Toast.Make(text, duration, fontSize);
+
+			await toast.Show();
+			return;
+		}
+
 		Preferences.Set("NaytaKasvisWidgetissa", e.Value);
 	}
 }

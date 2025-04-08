@@ -16,7 +16,7 @@ public partial class AppShell : Shell
 
         if(Preferences.Get("kasvisruokalistaEnabled", false))
 		{
-			if (!Preferences.Get("NaytaKasvis", false))
+			if (!Preferences.Get("NaytaKasvis", true))
 			{
 				tabbar.Items.Remove(KasvisruokaTab);
 			}
