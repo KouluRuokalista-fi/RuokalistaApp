@@ -92,7 +92,7 @@ public partial class WelcomePage : ContentPage
 		{
 			FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
 			var selectedSchool = Endpoints.Where(x => x.name == KouluPicker.SelectedItem.ToString()).First();
-			FirebaseMessaging.Instance.SubscribeToTopic(selectedSchool.url); //format: isokyro.kouluruokalista.fi
+			FirebaseMessaging.Instance.SubscribeToTopic(selectedSchool.url.ToLower()); //format: isokyro.kouluruokalista.fi
 		}
 		catch (Exception)
 		{
