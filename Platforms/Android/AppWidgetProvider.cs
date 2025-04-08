@@ -176,7 +176,7 @@ namespace RuokalistaApp.Platforms.Android
 
 
 
-			var highlightColor = Color.ParseColor(Preferences.Default.Get("primaryColor", Config.PrimaryFallbackColor));
+			var highlightColor = Color.ParseColor(Preferences.Default.Get("PrimaryColor", Config.PrimaryFallbackColor));
 			if (GetDate(ruokalista, 1).Date == DateTime.Now.Date)
 			{
 				remoteViews.SetTextColor(Resource.Id.Maanantai, highlightColor);
