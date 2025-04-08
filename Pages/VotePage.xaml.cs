@@ -5,8 +5,14 @@ public partial class VotePage : ContentPage
 	public VotePage()
 	{
 		InitializeComponent();
+		var mode = "dark";
+		if (Application.Current.UserAppTheme == AppTheme.Light)
+		{
+			mode = "light";
+		}
 
-		webview1.Source = Preferences.Get("School", "") + "/Aanestys/Tulokset?isApp=true";
+
+		webview1.Source = Preferences.Get("School", "") + $"/Aanestys/Tulokset?isApp=true&mode={mode}";
 	}
 
     private void RefreshView_Refreshing(object sender, EventArgs e)

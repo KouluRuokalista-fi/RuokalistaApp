@@ -1,3 +1,4 @@
+using AndroidX.ConstraintLayout.Utils.Widget;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using Newtonsoft.Json;
@@ -16,19 +17,27 @@ public partial class WelcomePage : ContentPage
 		HttpClient client = new HttpClient();
 		client.BaseAddress = new Uri("https://kouluruokalista.fi");
 		var request = "/api/v1/GetEndpoints";
-		HttpResponseMessage response = client.GetAsync(request).Result;
-		if (response.IsSuccessStatusCode)
+		try
 		{
-			var result = response.Content.ReadAsStringAsync().Result;
-			Endpoints = JsonConvert.DeserializeObject<List<Endpoint>>(result);
-			foreach (var endpoint in Endpoints)
+			HttpResponseMessage response = client.GetAsync(request).Result;
+			if (response.IsSuccessStatusCode)
 			{
-				KouluPicker.Items.Add(endpoint.name);
+				var result = response.Content.ReadAsStringAsync().Result;
+				Endpoints = JsonConvert.DeserializeObject<List<Endpoint>>(result);
+				foreach (var endpoint in Endpoints)
+				{
+					KouluPicker.Items.Add(endpoint.name);
+				}
+			}
+			else
+			{
+				DisplayAlert("Virhe " + response.StatusCode.ToString(), "Virhe ladatessa sisältöä", "ok");
+				return;
 			}
 		}
-		else
+		catch(Exception ex)
 		{
-			DisplayAlert("Virhe " + response.StatusCode.ToString(), "virhe ladatessa sisältöä", "ok");
+			DisplayAlert("Virhe", "Virhe yhdistäessä palvelimeen, tarkista verkkoyhteytesi!", "ok");
 			return;
 		}
 
@@ -70,6 +79,9 @@ public partial class WelcomePage : ContentPage
 			var toast = Toast.Make(text, duration, fontSize);
 
 			await toast.Show();
+			Loader.IsVisible = false;
+			Loader.IsRunning = false;
+			ActionButton.IsEnabled = true;
 			return;
 		}
 

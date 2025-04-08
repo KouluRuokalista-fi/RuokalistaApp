@@ -193,29 +193,40 @@ public partial class MainPage : ContentPage
 	{
 		await App.Current.MainPage.DisplayAlert("Virhe", reason, "OK");
 
-		if (File.Exists(Path.Combine(FileSystem.Current.CacheDirectory, "ruoka.json")))
+		if (!kasvisruokalista)
 		{
-			var output = "";
-			if (kasvisruokalista)
-			{
-				output = File.ReadAllText(Path.Combine(FileSystem.Current.CacheDirectory, "kasvisruoka.json"));
-			}
-			else
-			{
-				output = File.ReadAllText(Path.Combine(FileSystem.Current.CacheDirectory, "ruoka.json"));
-			}
-
-
-			Ruokalista ruoka = JsonConvert.DeserializeObject<Ruokalista>(output);
-			if(ruoka.WeekId == System.Globalization.ISOWeek.GetWeekOfYear(DateTime.Now))
-			{
-				Render(ruoka, false, stack, kasvisruokalista);
-			}
-			else
+			if (!File.Exists(Path.Combine(FileSystem.Current.CacheDirectory, "ruoka.json")))
 			{
 				stack.Children.Clear();
 				stack.Children.Add(new Label() { Text = "Ruokalistaa ei voitu ladata", FontSize = 45, FontAttributes = FontAttributes.Bold });
+				return;
 			}
+		}
+		else
+		{
+			if (!File.Exists(Path.Combine(FileSystem.Current.CacheDirectory, "kasvisruoka.json")))
+			{
+				stack.Children.Clear();
+				stack.Children.Add(new Label() { Text = "Ruokalistaa ei voitu ladata", FontSize = 45, FontAttributes = FontAttributes.Bold });
+				return;
+			}
+		}
+
+		var output = "";
+		if (kasvisruokalista)
+		{
+			output = File.ReadAllText(Path.Combine(FileSystem.Current.CacheDirectory, "kasvisruoka.json"));
+		}
+		else
+		{
+			output = File.ReadAllText(Path.Combine(FileSystem.Current.CacheDirectory, "ruoka.json"));
+		}
+
+
+		Ruokalista ruoka = JsonConvert.DeserializeObject<Ruokalista>(output);
+		if (ruoka.WeekId == System.Globalization.ISOWeek.GetWeekOfYear(DateTime.Now))
+		{
+			Render(ruoka, false, stack, kasvisruokalista);
 		}
 		else
 		{
