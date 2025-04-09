@@ -6,7 +6,7 @@ public partial class VotePage : ContentPage
 	{
 		InitializeComponent();
 		var mode = "dark";
-		if (Application.Current.UserAppTheme == AppTheme.Light)
+		if (Application.Current.RequestedTheme == AppTheme.Light)
 		{
 			mode = "light";
 		}
