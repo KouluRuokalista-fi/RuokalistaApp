@@ -1,9 +1,14 @@
-using AndroidX.ConstraintLayout.Utils.Widget;
+
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using Firebase.Messaging;
+
 using Newtonsoft.Json;
 namespace RuokalistaApp.Pages;
+
+#if ANDROID
+using AndroidX.ConstraintLayout.Utils.Widget;
+using Firebase.Messaging;
+#endif
 
 public partial class WelcomePage : ContentPage
 {
@@ -90,9 +95,11 @@ public partial class WelcomePage : ContentPage
 		//register notif channel
 		try
 		{
+#if ANDROID
 			FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
 			var selectedSchool = Endpoints.Where(x => x.name == KouluPicker.SelectedItem.ToString()).First();
 			FirebaseMessaging.Instance.SubscribeToTopic(selectedSchool.url.ToLower()); //format: isokyro.kouluruokalista.fi
+#endif
 		}
 		catch (Exception)
 		{

@@ -2,12 +2,12 @@ using System;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using RuokalistaApp.Models;
-using Android.OS;
 using Microsoft.Maui;
 using static System.Net.Mime.MediaTypeNames;
 using Application = Microsoft.Maui.Controls.Application;
 
 #if ANDROID
+using Android.OS;
 using Android.Content;
 using Android.Provider;
 using Firebase.Messaging;
@@ -132,7 +132,10 @@ public partial class SettingsPage : ContentPage
 	{
 		//unregister notification topic
 		var topic = Preferences.Get("School", "").Replace("https://", "").ToLower();
+
+#if ANDROID
 		FirebaseMessaging.Instance.UnsubscribeFromTopic(topic);
+#endif
 
 		//remove all currently set environment variables
 		Preferences.Clear();
