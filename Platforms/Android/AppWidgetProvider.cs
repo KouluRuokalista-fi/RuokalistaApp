@@ -76,91 +76,78 @@ namespace RuokalistaApp.Platforms.Android
 				apiurl = Preferences.Get("School", "") + $"/api/v1/KasvisRuokalista/{DateTime.Now.Year}/{currentWeek}";
 			}
 
+
+
 			try
 			{
 				using var client = new HttpClient();
 				HttpResponseMessage response = await client.GetAsync(apiurl);
-				if (response.IsSuccessStatusCode)
-				{
-					var menuData = await response.Content.ReadAsStringAsync();
-					//success
-					try
-					{
-						var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
-
-						//data is correct, display and save:
-
-						remoteViews.SetTextViewText(Resource.Id.Maanantai,
-							$"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
-						remoteViews.SetTextViewText(Resource.Id.Tiistai,
-							$"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
-						remoteViews.SetTextViewText(Resource.Id.Keskiviikko,
-							$"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
-						remoteViews.SetTextViewText(Resource.Id.Torstai,
-							$"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
-						remoteViews.SetTextViewText(Resource.Id.Perjantai,
-							$"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
-
-						HighlightDay(Menu, remoteViews);
-
-						//save to cache
-						await File.WriteAllTextAsync(System.IO.Path.Combine(FileSystem.Current.CacheDirectory, "widgetCache.json"), menuData);
-					}
-					catch(Exception)
-					{
-						//data was not in the correct format or broken
-						//try cache load 
-						try
-						{
-							menuData = await File.ReadAllTextAsync(System.IO.Path.Combine(FileSystem.Current.CacheDirectory, "widgetCache.json"));
-
-							var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
-
-							//data in cache is correct, display:
-
-							remoteViews.SetTextViewText(Resource.Id.Maanantai,
-								$"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
-							remoteViews.SetTextViewText(Resource.Id.Tiistai,
-								$"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
-							remoteViews.SetTextViewText(Resource.Id.Keskiviikko,
-								$"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
-							remoteViews.SetTextViewText(Resource.Id.Torstai,
-								$"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
-							remoteViews.SetTextViewText(Resource.Id.Perjantai,
-								$"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
-
-							HighlightDay(Menu, remoteViews);
-
-						}
-						catch (Exception)
-						{
-							//cache load failure
-							SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa");
-						}
 
 
-
-						
-						
-					}
-				}
-
-				else if (response.StatusCode == HttpStatusCode.NotFound)
+				//ei olemassa vielä
+				if(response.StatusCode == HttpStatusCode.NotFound)
 				{
 					SetErrorText(remoteViews, "Tämän viikon ruokalistaa ei ole vielä olemassa");
+					appWidgetManager.UpdateAppWidget(widgetId, remoteViews);
+					return;
 				}
-				else
-				{
-					//virhe
-					SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa: " + response.StatusCode.ToString());
-				}
+
+
+				var menuData = await response.Content.ReadAsStringAsync();
+
+				var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
+
+				//data is correct, display and save:
+
+				remoteViews.SetTextViewText(Resource.Id.Maanantai,
+					$"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
+				remoteViews.SetTextViewText(Resource.Id.Tiistai,
+					$"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
+				remoteViews.SetTextViewText(Resource.Id.Keskiviikko,
+					$"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
+				remoteViews.SetTextViewText(Resource.Id.Torstai,
+					$"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
+				remoteViews.SetTextViewText(Resource.Id.Perjantai,
+					$"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
+
+				HighlightDay(Menu, remoteViews);
+
+				//save to cache
+				await File.WriteAllTextAsync(System.IO.Path.Combine(FileSystem.Current.CacheDirectory, "widgetCache.json"), menuData);
 			}
 			catch (Exception)
 			{
-				SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa!");
-			}
+				//data was not in the correct format or broken
+				//try cache load 
+				try
+				{
+					var menuData = await File.ReadAllTextAsync(System.IO.Path.Combine(FileSystem.Current.CacheDirectory, "widgetCache.json"));
 
-			
+					var Menu = JsonConvert.DeserializeObject<Ruokalista>(menuData);
+
+					//data in cache is correct, display:
+
+					remoteViews.SetTextViewText(Resource.Id.Maanantai,
+						$"Maanantai {GetDate(Menu, 1).ToString("dd.MM")}:\n{TrimText(Menu.Maanantai)}");
+					remoteViews.SetTextViewText(Resource.Id.Tiistai,
+						$"Tiistai {GetDate(Menu, 2).ToString("dd.MM")}:\n{TrimText(Menu.Tiistai)}");
+					remoteViews.SetTextViewText(Resource.Id.Keskiviikko,
+						$"Keskiviikko {GetDate(Menu, 3).ToString("dd.MM")}:\n{TrimText(Menu.Keskiviikko)}");
+					remoteViews.SetTextViewText(Resource.Id.Torstai,
+						$"Torstai {GetDate(Menu, 4).ToString("dd.MM")}:\n{TrimText(Menu.Torstai)}");
+					remoteViews.SetTextViewText(Resource.Id.Perjantai,
+						$"Perjantai {GetDate(Menu, 5).ToString("dd.MM")}:\n{TrimText(Menu.Perjantai)}");
+
+					HighlightDay(Menu, remoteViews);
+
+				}
+				catch (Exception)
+				{
+					//cache load failure
+					SetErrorText(remoteViews, "Virhe ladatessa ruokalistaa");
+				}
+
+			}
 
 			appWidgetManager.UpdateAppWidget(widgetId, remoteViews);
 		}
