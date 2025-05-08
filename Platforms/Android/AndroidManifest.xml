@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.arttu.ruokalista" android:versionCode="13" android:versionName="13.0">
-	<application android:allowBackup="false" android:label="Isokyrö Ruokalista" android:supportsRtl="true"></application>
+	<application android:allowBackup="false" android:icon="@mipmap/logo_fix" android:label="Isokyrö Ruokalista" android:supportsRtl="true"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
