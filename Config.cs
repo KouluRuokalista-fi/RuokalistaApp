@@ -35,6 +35,6 @@ namespace RuokalistaApp
 			return dict;
 		}
 
-		public static string PrimaryFallbackColor = "#0074ff"; //update here and in Colors.xaml
+		public static string PrimaryFallbackColor = "#D1671D"; //update here and in Colors.xaml
 	}
 }

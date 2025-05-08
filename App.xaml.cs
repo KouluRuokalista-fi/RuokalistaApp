@@ -6,7 +6,14 @@ public partial class App : Application
 {
 	public App()
 	{
-		
+		//branded app static values setup
+		Preferences.Default.Set("School", "https://isokyro.kouluruokalista.fi");
+		Preferences.Default.Set("PrimaryColor", Config.PrimaryFallbackColor);
+		Preferences.Default.Set("Lang", "fi");
+		Preferences.Set("SetupDone", true);
+
+
+
 		if (Preferences.Default.ContainsKey("Teema"))
 		{
 			var key = Preferences.Default.Get("Teema", 0);
