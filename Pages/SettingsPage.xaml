@@ -10,9 +10,25 @@
             MaximumWidthRequest="700"
             >
             <Button x:Name="ChangeSchoolBtn" Text="Vaihda koulua/kieltä" Padding="0, 10" Margin="0, 0, 0 ,15" Clicked="ChangeSchoolBtn_Clicked" BackgroundColor="{DynamicResource Primary}"></Button>
-            
-            
-            
+
+
+
+            <VerticalStackLayout HorizontalOptions="Center" x:Name="LanguageStack" IsVisible="False">
+                <Label Text="Kieli" FontSize="25" HorizontalOptions="Center"></Label>
+                <Border StrokeThickness="5" Padding="0">
+                    <Picker x:Name="LanguagePicker" SelectedIndexChanged="LanguagePicker_SelectedIndexChanged"
+        Title="Valitse kieli" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Center" VerticalTextAlignment="Center" FontSize="20">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Suomi</x:String>
+
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Border>
+            </VerticalStackLayout>
+
+
 
             <VerticalStackLayout HorizontalOptions="Center" x:Name="TeemaStack">
                 <Label Text="Teema" FontSize="25" HorizontalOptions="Center"></Label>
