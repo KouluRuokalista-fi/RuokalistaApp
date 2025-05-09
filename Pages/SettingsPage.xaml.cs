@@ -37,7 +37,26 @@ public partial class SettingsPage : ContentPage
 		{
 			NaytaKasvisWidgetissa.IsToggled = Preferences.Get("NaytaKasvisWidgetissa", false);
 		}
+
+		//custom branded app
+		if(Preferences.Get("CustomApp", false))
+		{
+			ChangeSchoolBtn.IsVisible = false;
+			LanguageStack.IsVisible = true;
+
+			var selectedLang = Preferences.Get("Language", "fi");
+			if(selectedLang == "fi")
+			{
+				LanguagePicker.SelectedIndex = 0;
+			}
+			//TODO: add other languages
+			else
+			{
+				LanguagePicker.SelectedIndex = 0;
+			}
+		}
 		
+
 
 		_isInitializing = false;
 	}
@@ -147,11 +166,6 @@ public partial class SettingsPage : ContentPage
 
 	}
 
-	private void LanguagePicker_SelectedIndexChanged(object sender, EventArgs e)
-	{
-
-    }
-
 	private async void NaytaKasvisWidgetissa_Toggled(object sender, ToggledEventArgs e)
 	{
 		//prevent the event from firing when the page is initializing
@@ -173,5 +187,10 @@ public partial class SettingsPage : ContentPage
 		}
 
 		Preferences.Set("NaytaKasvisWidgetissa", e.Value);
+	}
+
+	private void LanguagePicker_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		Preferences.Default.Set("Lang", LanguagePicker.SelectedItem.ToString());
 	}
 }
