@@ -10,6 +10,7 @@ public partial class App : Application
 		Preferences.Default.Set("School", "https://isokyro.kouluruokalista.fi");
 		Preferences.Default.Set("PrimaryColor", Config.PrimaryFallbackColor);
 		Preferences.Default.Set("Lang", "fi");
+		Preferences.Default.Set("CustomApp", true);
 		Preferences.Set("SetupDone", true);
 
 
