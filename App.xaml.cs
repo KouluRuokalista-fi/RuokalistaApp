@@ -1,4 +1,6 @@
-﻿using RuokalistaApp.Pages;
+﻿using Firebase.Messaging;
+using RuokalistaApp.Pages;
+using System.Net;
 
 namespace RuokalistaApp;
 
@@ -12,6 +14,10 @@ public partial class App : Application
 		Preferences.Default.Set("Lang", "fi");
 		Preferences.Default.Set("CustomApp", true);
 		Preferences.Set("SetupDone", true);
+#if ANDROID
+		FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
+		FirebaseMessaging.Instance.SubscribeToTopic("isokyro.kouluruokalista.fi"); //format: isokyro.kouluruokalista.fi
+#endif
 
 
 
