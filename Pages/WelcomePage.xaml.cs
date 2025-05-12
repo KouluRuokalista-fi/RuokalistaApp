@@ -99,6 +99,8 @@ public partial class WelcomePage : ContentPage
 			FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
 			var selectedSchool = Endpoints.Where(x => x.name == KouluPicker.SelectedItem.ToString()).First();
 			FirebaseMessaging.Instance.SubscribeToTopic(selectedSchool.url.ToLower()); //format: isokyro.kouluruokalista.fi
+
+			await Platforms.Android.RequestNotificationPerms.RequestNotificationPermission();
 #endif
 		}
 		catch (Exception)
