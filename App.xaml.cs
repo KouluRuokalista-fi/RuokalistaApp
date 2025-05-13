@@ -1,6 +1,8 @@
-﻿using Firebase.Messaging;
-using RuokalistaApp.Pages;
+﻿using RuokalistaApp.Pages;
 using System.Net;
+#if ANDROID
+using Firebase.Messaging;
+#endif
 
 namespace RuokalistaApp;
 
