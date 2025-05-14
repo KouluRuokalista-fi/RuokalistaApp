@@ -6,4 +6,4 @@ Sovellus on saatavilla [Google Playsta](https://play.google.com/store/apps/detai
 
 
 # Kuvia
-![Kotinäyttö](https://raw.githubusercontent.com/ArttuKuikka/RuokalistaApp/master/Demo1.jpg)
+![Kotinäyttö](https://raw.githubusercontent.com/KouluRuokalista-fi/RuokalistaApp/master/Demo1.jpg)
