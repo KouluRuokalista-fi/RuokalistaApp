@@ -27,23 +27,34 @@ public partial class App : Application
 
 		InitializeComponent();
 
-		if(Preferences.Get("SetupDone", false))
+		
+
+	}
+
+	protected override Window CreateWindow(IActivationState? activationState)
+	{
+		if (Preferences.Get("SetupDone", false))
 		{
-			Application.Current.MainPage = new AppShell();
+			var window = new Window(new AppShell());
+
 
 			var color = Preferences.Get("PrimaryColor", Config.PrimaryFallbackColor);
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
-			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
+			window.Activated += (s, e) => UpdateAndroidSystemBars(color);
+
+			return window;
 		}
 		else
 		{
-			Application.Current.MainPage = new WelcomePage();
+			var window = new Window(new WelcomePage());
+			Application.Current.OpenWindow(window);
 
 			var color = Config.PrimaryFallbackColor;
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
-			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
-		}
+			window.Activated += (s, e) => UpdateAndroidSystemBars(color);
 
+			return window;
+		}
 	}
 
 	public static void SetCurrentAppColor(string color)
