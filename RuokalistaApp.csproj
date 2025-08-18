@@ -161,6 +161,10 @@
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.8.1" />
+	  <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.9.2.1" />
+	  <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core.Ktx" Version="2.9.2.1" />
+	  <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.9.2.1" />
 	  <PackageReference Include="Xamarin.AndroidX.SavedState.SavedState.Ktx" Version="1.3.1.1" />
 	  <PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
 	</ItemGroup>
