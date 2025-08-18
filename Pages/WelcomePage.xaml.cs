@@ -37,13 +37,13 @@ public partial class WelcomePage : ContentPage
 			}
 			else
 			{
-				DisplayAlert("Virhe " + response.StatusCode.ToString(), "Virhe ladatessa sis‰ltˆ‰", "ok");
+				DisplayAlert("Virhe " + response.StatusCode.ToString(), "Virhe ladatessa sis√§lt√∂√§", "ok");
 				return;
 			}
 		}
-		catch(Exception ex)
+		catch(Exception)
 		{
-			DisplayAlert("Virhe", "Virhe yhdist‰ess‰ palvelimeen, tarkista verkkoyhteytesi!", "ok");
+			DisplayAlert("Virhe", "Virhe yhdist√§ess√§ palvelimeen, tarkista verkkoyhteytesi!", "ok");
 			return;
 		}
 
@@ -63,7 +63,7 @@ public partial class WelcomePage : ContentPage
 		{
 			if(string.IsNullOrEmpty(KouluURLInput.Text))
 			{
-				await DisplayAlert("Virhe", "Palvelimen osoite ei voi olla tyhj‰", "ok");
+				await DisplayAlert("Virhe", "Palvelimen osoite ei voi olla tyhj√§", "ok");
 				return;
 			}
 			else if(!KouluURLInput.Text.StartsWith("http") || !KouluURLInput.Text.StartsWith("https"))
@@ -105,7 +105,7 @@ public partial class WelcomePage : ContentPage
 		}
 		catch (Exception)
 		{
-			string text = "Virhe liityess‰ ilmoituspalvelimelle. Jos ilmoitukset eiv‰t toimi, asenna sovellus uudelleen!";
+			string text = "Virhe liityess√§ ilmoituspalvelimelle. Jos ilmoitukset eiv√§t toimi, asenna sovellus uudelleen!";
 			ToastDuration duration = ToastDuration.Long;
 			double fontSize = 15;
 
@@ -122,7 +122,7 @@ public partial class WelcomePage : ContentPage
 
 			Preferences.Default.Set("SetupDone", true);
 
-			Application.Current.MainPage = new AppShell();
+			App.Current.Windows[0].Page = new AppShell(); 
 
 
 		}
