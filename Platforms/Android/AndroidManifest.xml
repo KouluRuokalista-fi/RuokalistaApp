@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="fi.KouluRuokalista.Ruokalista" android:versionCode="1" android:versionName="1">
-	<application android:allowBackup="false" android:label="KouluRuokalista.fi" android:supportsRtl="true" android:icon="@mipmap/logo_v2">
-		
-	</application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="fi.KouluRuokalista.Ruokalista" android:versionCode="2" android:versionName="1.1">
+	<application android:allowBackup="false" android:label="KouluRuokalista.fi" android:supportsRtl="true" android:icon="@mipmap/logo_v2"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
