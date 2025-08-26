@@ -6,7 +6,7 @@ public partial class App : Application
 {
 	public App()
 	{
-		
+
 		if (Preferences.Default.ContainsKey("Teema"))
 		{
 			var key = Preferences.Default.Get("Teema", 0);
@@ -26,6 +26,7 @@ public partial class App : Application
 
 
 		InitializeComponent();
+		
 
 		if(Preferences.Get("SetupDone", false))
 		{
@@ -43,6 +44,8 @@ public partial class App : Application
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
 			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
+
+		
 
 	}
 
