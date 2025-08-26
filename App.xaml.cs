@@ -6,7 +6,7 @@ public partial class App : Application
 {
 	public App()
 	{
-		
+
 		if (Preferences.Default.ContainsKey("Teema"))
 		{
 			var key = Preferences.Default.Get("Teema", 0);
@@ -26,35 +26,27 @@ public partial class App : Application
 
 
 		InitializeComponent();
-
 		
 
-	}
-
-	protected override Window CreateWindow(IActivationState? activationState)
-	{
-		if (Preferences.Get("SetupDone", false))
+		if(Preferences.Get("SetupDone", false))
 		{
-			var window = new Window(new AppShell());
-
+			Application.Current.MainPage = new AppShell();
 
 			var color = Preferences.Get("PrimaryColor", Config.PrimaryFallbackColor);
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
-			window.Activated += (s, e) => UpdateAndroidSystemBars(color);
-
-			return window;
+			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
 		else
 		{
-			var window = new Window(new WelcomePage());
-			Application.Current.OpenWindow(window);
+			Application.Current.MainPage = new WelcomePage();
 
 			var color = Config.PrimaryFallbackColor;
 			Application.Current.Resources["Primary"] = Color.FromArgb(color);
-			window.Activated += (s, e) => UpdateAndroidSystemBars(color);
-
-			return window;
+			MainPage.Appearing += (s, e) => UpdateAndroidSystemBars(color);
 		}
+
+		
+
 	}
 
 	public static void SetCurrentAppColor(string color)
