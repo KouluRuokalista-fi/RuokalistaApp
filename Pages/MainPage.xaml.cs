@@ -30,6 +30,11 @@ public partial class MainPage : ContentPage
 
     public async Task Load(VerticalStackLayout stack, bool kasvisruoka = false)
     {
+		//branded app feature
+#if ANDROID
+	    await Platforms.Android.RequestNotificationPerms.RequestNotificationPermission();
+#endif
+
 		string baseAddress = Preferences.Get("School", "");
 
         

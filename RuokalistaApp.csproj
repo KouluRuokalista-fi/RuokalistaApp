@@ -73,68 +73,83 @@
 	  <ApplicationVersion>12</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
+
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>Kouluruokalista.fi</ApplicationTitle>
-	  <ApplicationId>fi.kouluruokalista.ruokalista</ApplicationId>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>Isokyrö Ruokalista</ApplicationTitle>
+	  <ApplicationId>com.arttu.ruokalista</ApplicationId>
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\logo_v2.svg" Color="#0074ff" />
+		<MauiIcon Include="Resources\AppIcon\logo_fix.png" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Images\logo.png" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Images\logo.png" Color="#D1671D" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -148,6 +163,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\logo_fix.png" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\menu.png" />
 	  <None Remove="Resources\Images\settings.png" />

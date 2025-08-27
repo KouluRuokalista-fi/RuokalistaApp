@@ -1,4 +1,8 @@
 ﻿using RuokalistaApp.Pages;
+using System.Net;
+#if ANDROID
+using Firebase.Messaging;
+#endif
 
 namespace RuokalistaApp;
 
@@ -6,6 +10,20 @@ public partial class App : Application
 {
 	public App()
 	{
+
+		//branded app static values setup
+		Preferences.Default.Set("School", "https://isokyro.kouluruokalista.fi");
+		Preferences.Default.Set("PrimaryColor", Config.PrimaryFallbackColor);
+		Preferences.Default.Set("Lang", "fi");
+		Preferences.Default.Set("CustomApp", true);
+		Preferences.Set("SetupDone", true);
+#if ANDROID
+		FirebaseMessaging.Instance.SubscribeToTopic("GlobalNotifications");
+		FirebaseMessaging.Instance.SubscribeToTopic("isokyro.kouluruokalista.fi"); //format: isokyro.kouluruokalista.fi
+#endif
+
+
+
 
 		if (Preferences.Default.ContainsKey("Teema"))
 		{
